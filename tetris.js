@@ -48,7 +48,7 @@ document.addEventListener('keydown', function (event) {
 function pitClean() {
 	var j = 0;
  	for (let i = game.pit.length - 1; i > 0; --i) {
-        while (j < game.pit[i].length && game.pit[i][j] == 1) {
+        while (j < game.pit[i].length && game.pit[i][j] != 0) {
          		j++;
             }
         if ( j == game.pit[i].length) {
