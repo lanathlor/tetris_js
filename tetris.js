@@ -52,10 +52,12 @@ function pitClean() {
          		j++;
             }
         if ( j == game.pit[i].length) {
+        	game.dropCount++;
+			game.dropEvery -= 50;
         	const row = game.pit.splice(i, 1)[0].fill(0);
         	game.pit.unshift(row);
         	++i;
-        	game.score += 10 * ((game.dropCount / 10 | 0) + 1);
+        	game.score += 10 * (game.dropCount + 1);
     	}
     	j = 0;
     }
@@ -130,12 +132,12 @@ function resetGame()
 	game.tet = game.next;
 	game.pos.x = (game.pit[0].length / 2 | 0) - (game.tet[0].length / 2 | 0);
 	game.next = NewTet((7 * Math.random() | 0));
-	game.dropCount++;
 	pitClean();
-	if (game.dropCount % 10 == 0) {
-		game.dropEvery -= 50;
-	}
 	if (collision()) {
+		game.pit.forEach(function(row) {row.fill(0)});
+		game.score = 0;
+		game.dropEvery = 1000;
+		game.dropCount = 0;
 	}
 }
 
