@@ -17,17 +17,42 @@ var game = {
 		pause : -1,
 		score: 0,
 		pit: [],
+		allScore: [],
 		color: [
-		null,
-		'red',
-		'orange',
-		'blue',
-		'purple',
-		'GreenYellow',
-		'cyan',
-		'DeepSkyBlue',
-		]
+			null,
+			'red',
+			'orange',
+			'blue',
+			'purple',
+			'GreenYellow',
+			'cyan',
+			'DeepSkyBlue',
+		],
+		name: 0
 };
+
+document.getElementById('audio_file').load();
+document.getElementById('audio_file').play();
+document.getElementById('audio_file').loop = true;
+
+document.getElementById("formName").addEventListener("submit" ,function (e){
+	e.preventDefault();
+	game.name = document.getElementById("getName").value;
+	gamePause();
+	document.getElementById('name').innerHTML = "";
+	document.getElementById('name').innerText = game.name;
+})
+
+document.getElementById("music").addEventListener("change", function (){
+	let play = document.getElementById('music').checked;
+	if (play == true) {
+		document.getElementById('musicStat').innerText = "music : off";
+		document.getElementById('audio_file').pause();
+	} else {
+		document.getElementById('musicStat').innerText = "music : on";
+		document.getElementById('audio_file').play();
+	}
+});
 
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 37) {
@@ -135,6 +160,7 @@ function resetGame()
 	pitClean();
 	if (collision()) {
 		game.pit.forEach(function(row) {row.fill(0)});
+		document.getElementById('last').innerText = game.score;
 		game.score = 0;
 		game.dropEvery = 1000;
 		game.dropCount = 0;
@@ -229,6 +255,10 @@ function drawTet(tet, offset) {
 
 function gamePause () {
 	game.pause *= -1;
+	if (game.pause == 1)
+		document.getElementById('pause').innerText = "game paused";
+	else
+		document.getElementById('pause').innerText = "";
 }
 
 function draw() {
@@ -266,5 +296,5 @@ for (let i = 0; i != 20; i++) {
     }
 game.next = NewTet((7 * Math.random() | 0));
 resetGame();
-console.log(game.pit.length)
+gamePause();
 mainGame();

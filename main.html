@@ -1,12 +1,57 @@
 <html>
 <head>
     <title>Tetris</title>
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    	html, body {
+ 			max-width: 100%;
+    		overflow-x: hidden;
+		}
+    </style>
+    <audio id="audio_file">
+	    <source src="audio_file.mp3" type="audio/mpeg">
+	</audio>
 </head>
 <body>
     <div id="score"></div>
-    <canvas id="tetris" width="480" height="800"></canvas>
-    <p>Next tetrimino :</p>
-    <canvas id="next" width="160" height="160"></canvas>
+    <div id="pause"></div>
+    <div class="row">
+	    <div class="col-md-4">
+		    <canvas id="tetris" width="480" height="800"></canvas>
+    	</div>
+   		<div class="col-md-2">
+	    	<p>Next tetrimino :</p>
+    		<canvas id="next" width="160" height="160"></canvas>
+    	</div>
+    	<div class="col-md-4">
+    		<table class="table table-stripped">
+    		<tr>
+    		<td>nom</td>
+    		<td class="text-center">score</td>
+    		</tr>
+    		<tr>
+    		<td>lanath</td>
+    		<td class="text-center">0</td>
+    		</tr>
+    		<tr>
+    		<td class="text-center">last game : </td>
+    		</tr>
+    		<tr>
+    		<td id="name">
+    		<form id="formName">
+    			<input type="text" id="getName" placeholder="name">
+    			<button type="submit">save</button>
+    		</form>
+    		</td>
+    		<td class="text-center" id="last"></td>
+    		</tr>
+    		</table>
+    	</div>
+	    <div class="col-md-4">
+		    <label id="musicStat">music : on</label>
+		    <input type="checkbox" value="" id="music">
+	    </div>
+   	</div>
     <script src="tetris.js"></script>
 </body>
 </html>
